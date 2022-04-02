@@ -1,0 +1,4 @@
+include ':library-comic'
+include ':library-base'
+include ':app'
+rootProject.name = "OnlineComic"

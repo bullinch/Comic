@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/drawable/bg_item_word.xml" value="0.400390625" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/drawable/bg_oval.xml" value="0.30572916666666666" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/drawable/image_loader_loading.xml" value="0.23697916666666666" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout-land/fragment_tab_user.xml" value="0.10677083333333333" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/activity_comic_read.xml" value="0.22135416666666666" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/activity_main.xml" value="0.12664640324214793" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_bookshelf.xml" value="0.29583333333333334" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_classification.xml" value="0.1" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_comic_chapter.xml" value="0.19375" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_comic_details.xml" value="0.33" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_comic_read.xml" value="0.24270833333333333" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_comic_source.xml" value="0.1361111111111111" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_history.xml" value="0.29583333333333334" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_main.xml" value="0.1" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_main_bookshelf.xml" value="0.29583333333333334" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_page_read.xml" value="0.31979166666666664" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_ranking.xml" value="0.24583333333333332" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_recent_update.xml" value="0.12943262411347517" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_search.xml" value="0.28229166666666666" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_tab_browser.xml" value="0.12943262411347517" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_tab_my.xml" value="0.1" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/fragment_tab_user.xml" value="0.20364583333333333" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/item_comic_chapter.xml" value="0.1096757852077001" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/item_comic_page.xml" value="0.2760416666666667" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/item_comic_view_pager.xml" value="0.3234375" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/item_comic_word.xml" value="0.27708333333333335" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/item_favorite.xml" value="0.2864583333333333" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/item_history.xml" value="0.22083333333333333" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/item_history_header.xml" value="0.22083333333333333" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/item_people.xml" value="0.18211752786220872" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/item_recent_udapte.xml" value="0.1" />
+        <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/item_source.xml" value="0.1" />
+        <entry key="..\:/Android/demo/OnlineComic/library-base/src/main/res/layout/base_layout_loading.xml" value="0.14513677811550152" />
+      </map>
+    </option>
+  </component>
+  <component name="FindBugsConfigurable">
+    <option name="make" value="true" />
+    <option name="effort" value="default" />
+    <option name="priority" value="Medium" />
+    <option name="excludeFilter" value="" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="SuppressionsComponent">
+    <option name="suppComments" value="[]" />
+  </component>
+</project>
