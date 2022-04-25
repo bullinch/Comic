@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.library_base.fragment.BaseFragment;
 import com.example.library_base.util.log.Logger;
+import com.example.library_comic.bean.Source;
 import com.example.library_comic.common.ComicSource;
 import com.example.onlinecomic.R;
 import com.example.onlinecomic.databinding.FragmentTabBrowserBinding;
@@ -45,9 +46,8 @@ public class BrowserMainFragment extends BaseFragment<FragmentTabBrowserBinding,
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                String hostUrl = ((ComicSource)adapter.getData().get(position)).getSourceHost();
-                Logger.i(hostUrl);
-                ((MainFragment) getParentFragment()).startBrotherFragment(SourceBrowserFragment.newInstance(hostUrl));
+                Source source = ((Source)adapter.getData().get(position));
+                ((MainFragment) getParentFragment()).startBrotherFragment(SourceBrowserFragment.newInstance(source));
             }
         });
         viewDataBinding.etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -78,25 +78,16 @@ public class BrowserMainFragment extends BaseFragment<FragmentTabBrowserBinding,
         return getStoreViewModel(_mActivity);
     }
 
-    private void initData() {
-//        List<Source> list = new ArrayList<>();
-//        for(int i=0;i<10;i++) {
-//            Source source = new Source("https://www.manhuadb.com/", "漫画DB");
-//            list.add(source);
-//        }
-//        mAdapter.setList(list);
-    }
-
-   private class MyAdapter extends BaseQuickAdapter<ComicSource, BaseViewHolder> {
+   private class MyAdapter extends BaseQuickAdapter<Source, BaseViewHolder> {
 
        public MyAdapter() {
            super(R.layout.item_source);
        }
 
        @Override
-       protected void convert(BaseViewHolder baseViewHolder, ComicSource comicSource) {
-           baseViewHolder.setText(R.id.tv_title, comicSource.getSourceName());
-           baseViewHolder.setText(R.id.tv_cover, comicSource.getSourceName().substring(0,1));
+       protected void convert(BaseViewHolder baseViewHolder, Source source) {
+           baseViewHolder.setText(R.id.tv_title, source.name);
+           baseViewHolder.setText(R.id.tv_cover, source.name.substring(0,1));
        }
    }
 

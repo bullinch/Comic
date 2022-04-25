@@ -1,14 +1,11 @@
 package com.example.onlinecomic.ui.fragment.bookshelf;
 
 import android.graphics.Color;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -17,7 +14,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.example.library_base.base.BaseApplication;
 import com.example.library_base.fragment.BaseFragment;
 import com.example.library_base.util.log.Logger;
 import com.example.library_comic.bean.Comic;
@@ -26,8 +22,7 @@ import com.example.onlinecomic.app.MyApplication;
 import com.example.onlinecomic.bean.HistoryComic;
 import com.example.onlinecomic.callback.DialogClickListener;
 import com.example.onlinecomic.databinding.FragmentHistoryBinding;
-import com.example.onlinecomic.ui.activity.ComicReadActivity;
-import com.example.onlinecomic.util.ActivityUtils;
+import com.example.onlinecomic.util.IntentUtils;
 import com.example.onlinecomic.util.DialogUtils;
 import com.example.onlinecomic.util.TimeUtils;
 import com.example.onlinecomic.viewmodel.BookShelfViewModel;
@@ -86,7 +81,7 @@ public class HistoryFragment extends BaseFragment<FragmentHistoryBinding, BookSh
             HistoryComic historyComic = (HistoryComic) adapter.getData().get(position);
             if (historyComic.getObject() instanceof Comic) {
                 Comic comic = (Comic) historyComic.getObject();
-                ActivityUtils.intentActivity(_mActivity, ComicReadActivity.class, comic);
+                IntentUtils.intentChapterActivity(_mActivity, comic);
             }
         });
         myAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
@@ -103,7 +98,7 @@ public class HistoryFragment extends BaseFragment<FragmentHistoryBinding, BookSh
                             }
                         });
                     } else if (view.getId() == R.id.iv_play) {
-                        ActivityUtils.intentActivity(_mActivity, ComicReadActivity.class, comic, 1);
+                        IntentUtils.intentChapterActivity(_mActivity, comic, 1);
                     }
                 }
             }

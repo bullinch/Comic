@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">OnlineComic</string>
+
+
+    <string name="favorite">收藏</string>
+    <string name="history">历史</string>
+    <string name="download">下载</string>
+
+    <string name="age">age:%s</string>
+    <string name="txt_history">%s - %s</string>
+
+</resources>

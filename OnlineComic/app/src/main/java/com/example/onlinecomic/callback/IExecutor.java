@@ -1,5 +1,5 @@
 package com.example.onlinecomic.callback;
 
-public interface IExecutor {
-    void success();
+public interface IExecutor<T> {
+    void success(T t);
 }

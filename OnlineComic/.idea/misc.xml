@@ -36,8 +36,35 @@
         <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/item_recent_udapte.xml" value="0.1" />
         <entry key="..\:/Android/demo/OnlineComic/app/src/main/res/layout/item_source.xml" value="0.1" />
         <entry key="..\:/Android/demo/OnlineComic/library-base/src/main/res/layout/base_layout_loading.xml" value="0.14513677811550152" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/drawable/image_loader_loading.xml" value="0.27685185185185185" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/drawable/placeholder_loading.xml" value="0.26944444444444443" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/activity_comic_chapter.xml" value="0.37092391304347827" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/activity_comic_read.xml" value="0.37092391304347827" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/activity_main.xml" value="0.21197916666666666" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/fragment_bookshelf.xml" value="0.17451874366767983" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/fragment_classification.xml" value="0.12056737588652482" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/fragment_comic_chapter.xml" value="0.213768115942029" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/fragment_comic_read.xml" value="0.213768115942029" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/fragment_download.xml" value="0.2033514492753623" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/fragment_download_task.xml" value="0.29846014492753625" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/fragment_main.xml" value="0.21197916666666666" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/fragment_ranking.xml" value="0.27898550724637683" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/fragment_recent_update.xml" value="0.13855116514690982" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/fragment_tab_user.xml" value="0.1286727456940223" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/item_comic_chapter.xml" value="0.21467391304347827" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/item_comic_page.xml" value="0.2109375" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/item_comic_view_pager.xml" value="0.15526849037487336" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/item_download.xml" value="0.33" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/item_download_task.xml" value="0.18115942028985507" />
+        <entry key="..\:/GIT/Comic/OnlineComic/app/src/main/res/layout/item_people.xml" value="0.2515625" />
+        <entry key="..\:/GIT/Comic/OnlineComic/library-base/src/main/res/layout/base_layout_loading.xml" value="0.12135416666666667" />
       </map>
     </option>
+  </component>
+  <component name="EntryPointsManager">
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="org.greenrobot.greendao.annotation.Entity" />
+    </list>
   </component>
   <component name="FindBugsConfigurable">
     <option name="make" value="true" />

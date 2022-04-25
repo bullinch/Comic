@@ -5,9 +5,10 @@ import android.os.Parcelable;
 
 public class Page implements Parcelable {
 
-    private String title;
-    private String imgUrl;
-    private int index;
+    public String title;
+    public String imgUrl;
+    public String imgLocalPath;
+    public int index;
 
     public Page(String title, String imgUrl, int index) {
         this.title = title;
@@ -15,9 +16,17 @@ public class Page implements Parcelable {
         this.index = index;
     }
 
+    public Page(String title, String imgUrl, String imgLocalPath, int index) {
+        this.title = title;
+        this.imgUrl = imgUrl;
+        this.imgLocalPath = imgLocalPath;
+        this.index = index;
+    }
+
     protected Page(Parcel in) {
         title = in.readString();
         imgUrl = in.readString();
+        imgLocalPath = in.readString();
         index = in.readInt();
     }
 
@@ -33,30 +42,6 @@ public class Page implements Parcelable {
         }
     };
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -66,15 +51,7 @@ public class Page implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(title);
         parcel.writeString(imgUrl);
+        parcel.writeString(imgLocalPath);
         parcel.writeInt(index);
-    }
-
-    @Override
-    public String toString() {
-        return "Page{" +
-                "title='" + title + '\'' +
-                ", imgUrl='" + imgUrl + '\'' +
-                ", index=" + index +
-                '}';
     }
 }

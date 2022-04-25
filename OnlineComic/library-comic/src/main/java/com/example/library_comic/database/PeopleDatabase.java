@@ -3,16 +3,9 @@ package com.example.library_comic.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.library_comic.bean.Chapter;
 import com.example.library_comic.bean.DaoMaster;
 import com.example.library_comic.bean.DaoSession;
-import com.example.library_comic.bean.People;
-import com.example.library_comic.bean.PeopleDao;
 
-
-import java.util.List;
-
-import io.reactivex.Observable;
 
 public class PeopleDatabase {
     private static DaoSession mDaoSession;

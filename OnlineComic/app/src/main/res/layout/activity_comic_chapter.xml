@@ -8,7 +8,7 @@
             type="com.example.library_comic.bean.Comic" />
         <variable
             name="ClickProxy"
-            type="com.example.onlinecomic.ui.fragment.comic.ComicChapterFragment.ClickProxy" />
+            type="com.example.onlinecomic.ui.activity.ComicChapterActivity.ClickProxy" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

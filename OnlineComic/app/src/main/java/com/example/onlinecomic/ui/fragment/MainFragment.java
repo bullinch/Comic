@@ -15,6 +15,9 @@ import com.example.onlinecomic.ui.fragment.bookshelf.BookshelfMainFragment;
 import com.example.onlinecomic.ui.fragment.browser.BrowserMainFragment;
 import com.example.onlinecomic.ui.fragment.more.MoreMainFragment;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import me.majiajie.pagerbottomtabstrip.listener.SimpleTabItemSelectedListener;
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -68,11 +71,6 @@ public class MainFragment extends BaseFragment<FragmentMainBinding, BaseViewMode
             }
         });
     }
-
-    public void showHideFragment() {
-        showHideFragment(mFragments[2]);
-    }
-
 
     @Override
     protected BaseViewModel getViewModel() {

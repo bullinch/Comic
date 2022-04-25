@@ -7,23 +7,28 @@ import android.os.Parcelable;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Index;
+import org.greenrobot.greendao.annotation.Unique;
 
 @Entity
 public class Comic implements Parcelable {
     @Id
-    private Long id;
-    private String title;
-    private String author;
-    private String comicUrl;
-    private String coverUrl;
-    private String introduce;
-    private String sourceName;
-    private String sourceUrl;
-    private Long favoriteStamp;  // 时间戳
-    private Long historyStamp;  // 时间戳
-    private String readChapter;  // 阅读的章节
-    private String readChapterUrl;  // 阅读的章节Url
-    private Integer readPage;  // 阅读的页
+    public Long id;
+    public String title;
+    public String author;
+    @Index(unique = true)//设置唯一性
+    public String comicUrl;
+    public String coverUrl;
+    public String introduce;
+    public int sourceId;
+    public String sourceName;
+    public String sourceUrl;
+    public Long favoriteStamp;  // 时间戳
+    public Long historyStamp;  // 时间戳
+    public Long downloadStamp;  // 时间戳
+    public String readChapter;  // 阅读的章节
+    public String readChapterUrl;  // 阅读的章节Url
+    public Integer readPage;  // 阅读的页
 
     public Comic(String title, String comicUrl, String coverUrl) {
         this.title = title;
@@ -31,21 +36,24 @@ public class Comic implements Parcelable {
         this.coverUrl = coverUrl;
     }
 
-    @Generated(hash = 344936144)
+    @Generated(hash = 1925757871)
     public Comic(Long id, String title, String author, String comicUrl,
-            String coverUrl, String introduce, String sourceName, String sourceUrl,
-            Long favoriteStamp, Long historyStamp, String readChapter,
-            String readChapterUrl, Integer readPage) {
+            String coverUrl, String introduce, int sourceId, String sourceName,
+            String sourceUrl, Long favoriteStamp, Long historyStamp,
+            Long downloadStamp, String readChapter, String readChapterUrl,
+            Integer readPage) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.comicUrl = comicUrl;
         this.coverUrl = coverUrl;
         this.introduce = introduce;
+        this.sourceId = sourceId;
         this.sourceName = sourceName;
         this.sourceUrl = sourceUrl;
         this.favoriteStamp = favoriteStamp;
         this.historyStamp = historyStamp;
+        this.downloadStamp = downloadStamp;
         this.readChapter = readChapter;
         this.readChapterUrl = readChapterUrl;
         this.readPage = readPage;
@@ -54,7 +62,6 @@ public class Comic implements Parcelable {
     @Generated(hash = 1347984162)
     public Comic() {
     }
-
 
     protected Comic(Parcel in) {
         if (in.readByte() == 0) {
@@ -67,6 +74,7 @@ public class Comic implements Parcelable {
         comicUrl = in.readString();
         coverUrl = in.readString();
         introduce = in.readString();
+        sourceId = in.readInt();
         sourceName = in.readString();
         sourceUrl = in.readString();
         if (in.readByte() == 0) {
@@ -79,6 +87,11 @@ public class Comic implements Parcelable {
         } else {
             historyStamp = in.readLong();
         }
+        if (in.readByte() == 0) {
+            downloadStamp = null;
+        } else {
+            downloadStamp = in.readLong();
+        }
         readChapter = in.readString();
         readChapterUrl = in.readString();
         if (in.readByte() == 0) {
@@ -86,6 +99,55 @@ public class Comic implements Parcelable {
         } else {
             readPage = in.readInt();
         }
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(id);
+        }
+        dest.writeString(title);
+        dest.writeString(author);
+        dest.writeString(comicUrl);
+        dest.writeString(coverUrl);
+        dest.writeString(introduce);
+        dest.writeInt(sourceId);
+        dest.writeString(sourceName);
+        dest.writeString(sourceUrl);
+        if (favoriteStamp == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(favoriteStamp);
+        }
+        if (historyStamp == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(historyStamp);
+        }
+        if (downloadStamp == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(downloadStamp);
+        }
+        dest.writeString(readChapter);
+        dest.writeString(readChapterUrl);
+        if (readPage == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(readPage);
+        }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Comic> CREATOR = new Creator<Comic>() {
@@ -99,6 +161,27 @@ public class Comic implements Parcelable {
             return new Comic[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "Comic{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", comicUrl='" + comicUrl + '\'' +
+                ", coverUrl='" + coverUrl + '\'' +
+                ", introduce='" + introduce + '\'' +
+                ", sourceId=" + sourceId +
+                ", sourceName='" + sourceName + '\'' +
+                ", sourceUrl='" + sourceUrl + '\'' +
+                ", favoriteStamp=" + favoriteStamp +
+                ", historyStamp=" + historyStamp +
+                ", downloadStamp=" + downloadStamp +
+                ", readChapter='" + readChapter + '\'' +
+                ", readChapterUrl='" + readChapterUrl + '\'' +
+                ", readPage=" + readPage +
+                '}';
+    }
 
     public Long getId() {
         return this.id;
@@ -180,6 +263,22 @@ public class Comic implements Parcelable {
         this.historyStamp = historyStamp;
     }
 
+    public Long getDownloadStamp() {
+        return this.downloadStamp;
+    }
+
+    public void setDownloadStamp(Long downloadStamp) {
+        this.downloadStamp = downloadStamp;
+    }
+
+    public String getReadChapter() {
+        return this.readChapter;
+    }
+
+    public void setReadChapter(String readChapter) {
+        this.readChapter = readChapter;
+    }
+
     public String getReadChapterUrl() {
         return this.readChapterUrl;
     }
@@ -196,72 +295,11 @@ public class Comic implements Parcelable {
         this.readPage = readPage;
     }
 
-    @Override
-    public String toString() {
-        return "Comic{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", comicUrl='" + comicUrl + '\'' +
-                ", coverUrl='" + coverUrl + '\'' +
-                ", introduce='" + introduce + '\'' +
-                ", sourceName='" + sourceName + '\'' +
-                ", sourceUrl='" + sourceUrl + '\'' +
-                ", favoriteStamp=" + favoriteStamp +
-                ", historyStamp=" + historyStamp +
-                ", readChapter='" + readChapter + '\'' +
-                ", readChapterUrl='" + readChapterUrl + '\'' +
-                ", readPage=" + readPage +
-                '}';
+    public int getSourceId() {
+        return this.sourceId;
     }
 
-    public String getReadChapter() {
-        return this.readChapter;
-    }
-
-    public void setReadChapter(String readChapter) {
-        this.readChapter = readChapter;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        if (id == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeLong(id);
-        }
-        parcel.writeString(title);
-        parcel.writeString(author);
-        parcel.writeString(comicUrl);
-        parcel.writeString(coverUrl);
-        parcel.writeString(introduce);
-        parcel.writeString(sourceName);
-        parcel.writeString(sourceUrl);
-        if (favoriteStamp == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeLong(favoriteStamp);
-        }
-        if (historyStamp == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeLong(historyStamp);
-        }
-        parcel.writeString(readChapter);
-        parcel.writeString(readChapterUrl);
-        if (readPage == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(readPage);
-        }
+    public void setSourceId(int sourceId) {
+        this.sourceId = sourceId;
     }
 }

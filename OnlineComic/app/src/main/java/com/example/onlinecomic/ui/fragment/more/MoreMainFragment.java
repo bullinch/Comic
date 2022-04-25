@@ -1,10 +1,11 @@
 package com.example.onlinecomic.ui.fragment.more;
 
 
-
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
-import androidx.lifecycle.AndroidViewModel;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -17,19 +18,23 @@ import com.example.library_comic.bean.People;
 import com.example.library_comic.bean.PeopleDao;
 import com.example.library_comic.database.PeopleDatabase;
 import com.example.onlinecomic.R;
-import com.example.onlinecomic.app.MyApplication;
 import com.example.onlinecomic.databinding.FragmentTabUserBinding;
-import com.example.onlinecomic.databinding.FragmentTabUserBindingImpl;
 import com.example.onlinecomic.databinding.ItemPeopleBinding;
-import com.example.onlinecomic.viewmodel.TestViewModel;
-
-import org.greenrobot.greendao.rx.RxDao;
+import com.example.onlinecomic.util.ComicUtils;
+import com.zhouyou.http.EasyHttp;
+import com.zhouyou.http.callback.CallBack;
+import com.zhouyou.http.exception.ApiException;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class MoreMainFragment extends BaseFragment<FragmentTabUserBinding, BaseViewModel> {
 
@@ -54,9 +59,25 @@ public class MoreMainFragment extends BaseFragment<FragmentTabUserBinding, BaseV
         myAdapter = new MyAdapter();
         viewDataBinding.recycler.setAdapter(myAdapter);
         getData();
+    }
 
-        TestViewModel testViewModel = new ViewModelProvider(_mActivity).get(TestViewModel.class);
-        testViewModel.a();
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        ComicUtils.start();
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }).start();
+        try {
+            ComicUtils.start();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -64,16 +85,11 @@ public class MoreMainFragment extends BaseFragment<FragmentTabUserBinding, BaseV
         return null;
     }
 
+    private List<People> peopleList= new ArrayList<>();
     private void getData() {
-        long time = System.currentTimeMillis();
-        List<People> peopleList = new ArrayList<>();
-        for(int i=0;i<20000;i++) {
+        for(int i=0;i<20;i++) {
             peopleList.add(new People(i, "XZB_"+i, "Student_"+i));
         }
-        List<People> comics = mDao.queryBuilder().where(PeopleDao.Properties.Name.eq("XZB_4567"))
-                .where(PeopleDao.Properties.Name.eq("XZB_4867")).list();
-        Logger.i("time3-->"+(System.currentTimeMillis()-time)+"____"+comics.size());
-
     }
 
     private class MyAdapter extends BaseQuickAdapter<People, BaseDataBindingHolder<ItemPeopleBinding>> {
@@ -93,29 +109,18 @@ public class MoreMainFragment extends BaseFragment<FragmentTabUserBinding, BaseV
 
     public class ClickProxy {
         public void insert(View v) {
-            People people = new People(4, "XZB_"+6, "Student_"+5);
-            long id = mDao.insertOrReplace(people);
-            Logger.i("insert: "+id);
-            List<People> list = mDao.queryBuilder().list();
-            myAdapter.setList(list);
+            List<People> comics = mDao.queryBuilder().list();
+            myAdapter.setList(comics);
         }
+
         public void update(View v) {
-            People people = new People(5, "XZB_"+5, "Student_"+5);
-            Long id = mDao.getKey(people);
-            Logger.i("insert: "+id);
-//            List<People> list = mDao.queryBuilder().list();
-//            myAdapter.setList(list);
+            People people = new People(100, "XZB_"+3, "Student_"+100);
+            mDao.insertOrReplace(people);
+            List<People> comics = mDao.queryBuilder().list();
+            myAdapter.setList(comics);
         }
+
         public void delete(View v) {
-//            Logger.i("delete: "+mDao.queryBuilder().where
-//                    (PeopleDao.Properties.Name.eq("XZB_"+5)).list().size());
-            for(People p :
-                    mDao.queryBuilder().where(PeopleDao.Properties.Name.eq("XZB_"+5)).list()) {
-                mDao.delete(p);
-            }
-            List<People> list = mDao.queryBuilder().list();
-            myAdapter.setList(list);
-            Logger.i("delete: "+list.size());
         }
     }
 

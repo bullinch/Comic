@@ -15,6 +15,7 @@ import com.example.library_comic.bean.Comic;
 import com.example.onlinecomic.R;
 import com.example.onlinecomic.databinding.FragmentSearchBinding;
 import com.example.onlinecomic.databinding.ItemFavoriteBinding;
+import com.example.onlinecomic.ui.activity.ComicChapterActivity;
 import com.example.onlinecomic.ui.activity.ComicReadActivity;
 import com.example.onlinecomic.viewmodel.BrowserViewModel;
 import com.example.onlinecomic.weight.RecyclerItemDecoration;
@@ -65,7 +66,7 @@ public class SearchFragment extends BaseFragment<FragmentSearchBinding, BrowserV
         myAdapter = new MyAdapter();
         myAdapter.setOnItemClickListener((adapter, view, position) -> {
             Comic comic = (Comic) adapter.getData().get(position);
-            Intent intent = new Intent(_mActivity, ComicReadActivity.class);
+            Intent intent = new Intent(_mActivity, ComicChapterActivity.class);
             intent.putExtra("comic", comic);
             _mActivity.startActivity(intent);
         });

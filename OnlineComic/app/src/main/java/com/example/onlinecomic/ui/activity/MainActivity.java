@@ -1,5 +1,7 @@
 package com.example.onlinecomic.ui.activity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 
 import com.example.library_base.activity.BaseActivity;
@@ -7,48 +9,24 @@ import com.example.library_base.util.log.Logger;
 import com.example.library_base.viewmodel.IBaseViewModel;
 import com.example.onlinecomic.R;
 import com.example.onlinecomic.ui.fragment.MainFragment;
+import com.yanzhenjie.permission.AndPermission;
 
 public class MainActivity extends BaseActivity {
-
-    private MainFragment mainFragment;
 
     @Override
     protected int getLayoutResourceID() {
         return R.layout.activity_main;
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void initView() {
-        Logger.i("initView__"+(findFragment(MainFragment.class) == null));
         if (findFragment(MainFragment.class) == null) {
-            mainFragment = MainFragment.newInstance();
-            loadRootFragment(R.id.fl_container, mainFragment);
-        } else {
-            mainFragment = findFragment(MainFragment.class);
+            loadRootFragment(R.id.fl_container, MainFragment.newInstance());
         }
+        AndPermission.with(this).runtime().permission(Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE).onGranted(permissions ->
+                Logger.i(permissions.toString())).start();
     }
 
-    @Override
-    protected IBaseViewModel getViewModel() {
-        return null;
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        Logger.i("onNewIntent");
-        setIntent(intent);
-        mainFragment.showHideFragment();
-    }
-
-    @Override
-    protected int getBindingVariable() {
-        return 0;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Logger.i("onDestroy");
-    }
 }

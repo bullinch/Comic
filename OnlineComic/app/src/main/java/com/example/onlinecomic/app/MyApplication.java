@@ -1,6 +1,9 @@
 package com.example.onlinecomic.app;
 
 import android.app.Application;
+import android.content.Intent;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelStore;
@@ -12,6 +15,8 @@ import com.example.library_base.loadsir.ErrorCallback;
 import com.example.library_base.loadsir.LoadingCallback;
 import com.example.library_base.loadsir.TimeoutCallback;
 import com.example.library_comic.database.ComicDatabase;
+import com.example.onlinecomic.downolad.DownloadDatabase;
+import com.example.onlinecomic.service.DownloadService;
 import com.kingja.loadsir.core.LoadSir;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.cache.converter.GsonDiskConverter;
@@ -34,12 +39,20 @@ import me.yokeyword.fragmentation.helper.ExceptionHandler;
 public class MyApplication extends Application implements ViewModelStoreOwner {
 
     private ViewModelStore mAppViewModelStore;
+    private static MyApplication myapp;
+    public static int mWidthPixels, mHeightPixels;
+
+    public static MyApplication getApp() {
+        return myapp;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        myapp = this;
         EasyHttp.init(this);//默认初始化
         ComicDatabase.getInstance().init(this);
+        DownloadDatabase.getInstance().init(this);
         mAppViewModelStore = new ViewModelStore();
         EasyHttp.getInstance()
                 .setReadTimeOut(15 * 1000)
@@ -62,14 +75,16 @@ public class MyApplication extends Application implements ViewModelStoreOwner {
                     }
                 })
                 .install();
-        LoadSir.beginBuilder()
-                .addCallback(new ErrorCallback())
-                .addCallback(new LoadingCallback())
-                .addCallback(new EmptyCallback())
-                .addCallback(new TimeoutCallback())
-                .setDefaultCallback(LoadingCallback.class)
-                .commit();
+        initPixels();
         handleSSSLHandshake();
+        startService(new Intent(this, DownloadService.class));
+    }
+
+    private void initPixels(){
+        DisplayMetrics metrics = new DisplayMetrics();
+        ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
+        mWidthPixels = metrics.widthPixels;
+        mHeightPixels = metrics.heightPixels;
     }
 
     private void handleSSSLHandshake() {

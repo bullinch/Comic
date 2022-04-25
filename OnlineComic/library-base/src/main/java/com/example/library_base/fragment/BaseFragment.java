@@ -16,18 +16,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.library_base.base.IBaseView;
-import com.example.library_base.loadsir.EmptyCallback;
-import com.example.library_base.loadsir.ErrorCallback;
-import com.example.library_base.loadsir.LoadingCallback;
 import com.example.library_base.util.ClassUtil;
 import com.example.library_base.viewmodel.BaseViewModel;
-import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.core.LoadService;
-import com.kingja.loadsir.core.LoadSir;
 
 import org.simple.eventbus.EventBus;
-
-import java.security.Provider;
 
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -67,10 +60,6 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        if (getBindingVariable() > 0) {
-//            viewDataBinding.setVariable(getBindingVariable(), viewModel);
-//            viewDataBinding.executePendingBindings();
-//        }
     }
 
     protected VM getStoreViewModel(ViewModelStoreOwner owner) {
@@ -89,49 +78,6 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     @Override
     public void onDetach() {
         super.onDetach();
-    }
-
-    /**
-     * 注册LoadSir
-     *
-     * @param view 替换视图
-     */
-    public void setLoadSir(View view) {
-        if (mLoadService == null){
-            mLoadService = LoadSir.getDefault()
-                    .register(view, (Callback.OnReloadListener) v -> {
-                        //onRetryBtnClick();
-                    });
-        }
-
-    }
-
-    @Override
-    public void showContent() {
-        if (null != mLoadService) {
-            mLoadService.showSuccess();
-        }
-    }
-
-    @Override
-    public void showLoading() {
-        if (null != mLoadService) {
-            mLoadService.showCallback(LoadingCallback.class);
-        }
-    }
-
-    @Override
-    public void showEmpty() {
-        if (null != mLoadService) {
-            mLoadService.showCallback(EmptyCallback.class);
-        }
-    }
-
-    @Override
-    public void showFailure(String message) {
-        if (null != mLoadService) {
-            mLoadService.showCallback(ErrorCallback.class);
-        }
     }
 
     @Nullable

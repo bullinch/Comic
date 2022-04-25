@@ -6,9 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -24,8 +22,8 @@ import me.yokeyword.fragmentation.SupportFragment;
 
 public class BookshelfMainFragment extends BaseFragment<FragmentMainBookshelfBinding, BaseViewModel> {
 
-    private SupportFragment[] fragments = new SupportFragment[2];
-    private final String[] tabs = new String[]{"书架", "历史"};
+    private SupportFragment[] fragments = new SupportFragment[3];
+    private final int[] tabsId = new int[]{R.string.favorite, R.string.history, R.string.download};
 
     public static BookshelfMainFragment newInstance() {
         return new BookshelfMainFragment();
@@ -41,12 +39,8 @@ public class BookshelfMainFragment extends BaseFragment<FragmentMainBookshelfBin
         Logger.i("initView");
         viewDataBinding.viewPager.setAdapter(new MyPagerAdapter(getChildFragmentManager(), getLifecycle()));
         viewDataBinding.viewPager.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
-        new TabLayoutMediator(viewDataBinding.tabLayout, viewDataBinding.viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText(tabs[position]);
-            }
-        }).attach();
+        new TabLayoutMediator(viewDataBinding.tabLayout, viewDataBinding.viewPager, (tab, position)
+                -> tab.setText(getString(tabsId[position]))).attach();
         viewDataBinding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -79,8 +73,9 @@ public class BookshelfMainFragment extends BaseFragment<FragmentMainBookshelfBin
 
         public MyPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
             super(fragmentManager, lifecycle);
-            fragments[0] = BookShelfFragment.newInstance();
+            fragments[0] = FavoriteFragment.newInstance();
             fragments[1] = HistoryFragment.newInstance();
+            fragments[2] = DownloadFragment.newInstance();
         }
 
         @NonNull

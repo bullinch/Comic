@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">OnlineComic</string>
 
+    <string name="favorite">favorite</string>
+    <string name="history">history</string>
+    <string name="download">download</string>
+
     <string name="age">age:%s</string>
 
     <string name="txt_history">%s - %s</string>

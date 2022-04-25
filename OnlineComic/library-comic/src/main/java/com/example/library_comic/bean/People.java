@@ -3,6 +3,7 @@ package com.example.library_comic.bean;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Index;
 import org.greenrobot.greendao.annotation.Unique;
 
 @Entity
@@ -12,6 +13,7 @@ public class People {
     private Long id;
 
     private int age;
+    @Index(unique = true)//设置唯一性
     private String name;
     private String work;
 

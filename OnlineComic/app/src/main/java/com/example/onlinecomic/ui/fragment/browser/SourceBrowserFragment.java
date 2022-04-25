@@ -13,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.library_base.fragment.BaseFragment;
 import com.example.library_base.util.log.Logger;
 import com.example.library_comic.bean.Comic;
+import com.example.library_comic.bean.Source;
 import com.example.onlinecomic.R;
 import com.example.onlinecomic.databinding.FragmentComicSourceBinding;
 import com.example.onlinecomic.viewmodel.BrowserViewModel;
@@ -24,12 +25,13 @@ import me.yokeyword.fragmentation.SupportFragment;
 
 public class SourceBrowserFragment extends BaseFragment<FragmentComicSourceBinding, BrowserViewModel> {
 
-    private SupportFragment[] fragments = new SupportFragment[3];
+    private final SupportFragment[] fragments = new SupportFragment[3];
     private final String[] tabs = new String[]{"最新", "排行", "分类"};
+    private Source mSource;
 
-    public static SourceBrowserFragment newInstance(String comicUrl) {
+    public static SourceBrowserFragment newInstance(Source source) {
         Bundle bundle = new Bundle();
-        bundle.putString("URL", comicUrl);
+        bundle.putParcelable("source", source);
         SourceBrowserFragment fragment = new SourceBrowserFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -44,18 +46,12 @@ public class SourceBrowserFragment extends BaseFragment<FragmentComicSourceBindi
     @Override
     protected void initView() {
         Logger.i("initView");
+        mSource = getArguments().getParcelable("source");
+        Logger.i(mSource.toString());
         viewDataBinding.viewPager.setAdapter(new MyPagerAdapter(getChildFragmentManager(), getLifecycle()));
         viewDataBinding.viewPager.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
         new TabLayoutMediator(viewDataBinding.tabLayout, viewDataBinding.viewPager, (tab, position) -> tab.setText(tabs[position])).attach();
-
-        assert getArguments() != null;
-        String comicUrl = getArguments().getString("URL");
-        viewModel.requestHostUrl(comicUrl);
-        viewModel.recentUpdateList.observe(getViewLifecycleOwner(), new Observer<List<Comic>>() {
-            @Override
-            public void onChanged(List<Comic> comics) {
-            }
-        });
+        viewModel.requestHostUrl(mSource.id);
     }
 
     @Override
@@ -67,9 +63,9 @@ public class SourceBrowserFragment extends BaseFragment<FragmentComicSourceBindi
 
         public MyPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
             super(fragmentManager, lifecycle);
-            fragments[0] = RecentUpdateFragment.newInstance();
-            fragments[1] = RankingFragment.newInstance();
-            fragments[2] = ClassificationFragment.newInstance();
+            fragments[0] = RecentUpdateFragment.newInstance(mSource);
+            fragments[1] = RankingFragment.newInstance(mSource);
+            fragments[2] = ClassificationFragment.newInstance(mSource);
         }
 
         @NonNull

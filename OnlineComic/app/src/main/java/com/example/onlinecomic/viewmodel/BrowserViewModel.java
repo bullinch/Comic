@@ -8,7 +8,9 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.library_base.base.Callback;
 import com.example.library_base.util.log.Logger;
 import com.example.library_base.viewmodel.BaseViewModel;
+import com.example.library_comic.SourceEnum;
 import com.example.library_comic.bean.Comic;
+import com.example.library_comic.common.ComicSource;
 import com.example.onlinecomic.model.ComicBrowserModel;
 
 import java.util.List;
@@ -35,12 +37,13 @@ public class BrowserViewModel extends BaseViewModel<ComicBrowserModel> {
         model.cancel();
     }
 
-    public void requestHostUrl(String url) {
-        model.requestHostUrl(url, new Callback<String>() {
+    public void requestHostUrl(int sourceId) {
+        ComicSource source = SourceEnum.getMAP().get(sourceId);
+        model.requestHostUrl(source.getSourceHost(), new Callback<String>() {
             @Override
             public void onSuccess(String s) {
-                recentUpdateList.setValue(model.parseRecentUpdateList(s));
-                rankingList.setValue(model.parseRankingList(s));
+                recentUpdateList.setValue(model.parseRecentUpdateList(source, s));
+                rankingList.setValue(model.parseRankingList(source, s));
             }
 
             @Override
